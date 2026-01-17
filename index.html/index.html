@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Anniversary</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #ffe6eb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  overflow: hidden;
+}
+
+.box {
+  background: #fff0f5;
+  padding: 30px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  z-index: 2;
+}
+
+h1 { color: #ff4d6d; }
+
+input {
+  padding: 10px;
+  width: 80%;
+  border-radius: 8px;
+  border: 1px solid #ff4d6d;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 20px;
+  background: #ff4d6d;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.heart {
+  font-size: 80px;
+  color: red;
+}
+
+p { line-height: 1.6; }
+
+.floating-heart {
+  position: fixed;
+  bottom: -20px;
+  animation: floatUp linear forwards;
+  color: #ff4d6d;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  to {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <h1 id="title">Enter Your Name</h1>
+
+  <input type="text" id="namaeInput" value="Nouna">
+
+  <br><br>
+
+  <!-- ✅ ใช้ onclick ตรง ๆ -->
+  <button type="button" onclick="start()">Start</button>
+</div>
+
+<script>
+function start() {
+  const name =
+    document.getElementById("namaeInput").value || "My Love";
+
+  document.getElementById("title").innerText =
+    "Happy Anniversary, " + name + " 🤍";
+
+  document.getElementById("namaeInput").remove();
+
+  document.querySelector(".box").innerHTML = `
+    <h1>Happy Anniversary, ${name} 🤍</h1>
+
+    <div class="heart">❤️</div>
+
+    <p>
+      Happy Anniversary 1 Month 🤍<br><br>
+      ເຖິງ 1 ເດືອນອາດຈະບໍ່ດົນປານໃດ
+      ແຕ່ຂອບໃຈທີ່ໂຕເຂົ້າມາເຮັດໃຫ້ທຸກມື້ຂອງເພີ່ນມີຄວາມໝາຍ 💖<br><br>
+      ຂໍໃຫ້ເຮົາຮັກກັນແບບນີ້ໄປດົນໆ ❤️
+    </p>
+
+    <div style="margin-top:20px;">
+      <iframe
+        src="https://open.spotify.com/embed/track/3vkCueOmm7xQDoJ17W1Pm3"
+        width="300"
+        height="80"
+        frameborder="0"
+        allow="encrypted-media">
+      </iframe>
+    </div>
+  `;
+
+  startHearts();
+}
+
+function startHearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "floating-heart";
+    heart.textContent = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (16 + Math.random() * 28) + "px";
+    heart.style.animationDuration =
+      (4 + Math.random() * 4) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 9000);
+  }, 500);
+}
+</script>
+
+</body>
+</html>
